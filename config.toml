@@ -3,7 +3,7 @@ baseURL = "https://example.com"
 languageCode = "en-us"
 theme = "ananke"
 themesDir = "./themes"
-publishDir = "docs"
+publishDir = "./docs"
 
 MetaDataFormat = "yaml"
 DefaultContentLanguage = "en"

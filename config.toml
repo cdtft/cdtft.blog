@@ -1,5 +1,5 @@
 title = "Notre-Dame de Paris"
-baseURL = "https://cdtft.github.io/cdtft.blog/docs"
+baseURL = "https://cdtft.github.io/cdtft.blog/"
 languageCode = "en-us"
 theme = "ananke"
 themesDir = "./themes"

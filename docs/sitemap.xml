@@ -3,6 +3,34 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://cdtft.github.io/cdtft.blog/post/java_spring_factrorybean/</loc>
+    <lastmod>2020-03-24T13:50:44+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://cdtft.github.io/cdtft.blog/tags/spring/</loc>
+    <lastmod>2020-03-24T13:50:44+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://cdtft.github.io/cdtft.blog/tags/</loc>
+    <lastmod>2020-03-24T13:50:44+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://cdtft.github.io/cdtft.blog/</loc>
+    <lastmod>2020-03-24T13:50:44+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://cdtft.github.io/cdtft.blog/tags/java/</loc>
     <lastmod>2020-03-23T14:40:37+08:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -10,21 +38,7 @@
   </url>
   
   <url>
-    <loc>https://cdtft.github.io/cdtft.blog/tags/</loc>
-    <lastmod>2020-03-23T14:40:37+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://cdtft.github.io/cdtft.blog/post/myfirst/</loc>
-    <lastmod>2020-03-23T14:40:37+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://cdtft.github.io/cdtft.blog/</loc>
     <lastmod>2020-03-23T14:40:37+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>

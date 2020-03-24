@@ -6,10 +6,23 @@
     <description>Recent content in 我用双手实现你的梦想 on cdftf@qq.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 23 Mar 2020 14:40:37 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 24 Mar 2020 13:50:44 +0800</lastBuildDate>
     
 	<atom:link href="https://cdtft.github.io/cdtft.blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>How to use the Spring FactoryBean?(翻译)</title>
+      <link>https://cdtft.github.io/cdtft.blog/post/java_spring_factrorybean/</link>
+      <pubDate>Tue, 24 Mar 2020 13:50:44 +0800</pubDate>
+      
+      <guid>https://cdtft.github.io/cdtft.blog/post/java_spring_factrorybean/</guid>
+      <description>1. Overview 有两种类型的bean在Spring bean容器中：普通的bean(ordinary bean)和工厂bean(factory bean)。Spring直接使用前者，后者能够产生又Spring管理的对象。简单的说，我们可以通过实现org.springframework.beans.factory.FactoryBean接口来构建一个工程bean。
+2. Factory Beans基础 2.1 实现一个FactoryBean 首先来让我们看看FactoryBean接口
+public interface FactoryBean { T getObject() throws Exception; Class&amp;lt;?&amp;gt; getObjectType(); boolean isSingleton(); } 让我们详细的看看这个三个方法的功能
+ getObject()-返回一个由该工厂产生对象，这个对象将被Spring容器使用 getObjectType()-返回该工厂生产bena对象的类类型 isSingleton()-判断由该工厂产生的bean是否是单例的 接下来我们实现一个FactoryBean实例。实现一个产生Tool类型的ToolFactory。  public class Tool { private int id; // standard constructors, getters and setters } ToolFactory.java:
+public class ToolFactory implements FactoryBean&amp;lt;Tool&amp;gt; { private int factoryId; private int toolId; @Override public Tool getObject() throws Exception { return new Tool(toolId); } @Override public Class&amp;lt;?</description>
+    </item>
     
     <item>
       <title>单例延迟初始化</title>

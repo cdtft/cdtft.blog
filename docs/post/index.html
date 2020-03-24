@@ -125,6 +125,30 @@
             <div class="mb3 pa4 mid-gray overflow-hidden">
     
       <div class="f6">
+        March 24, 2020
+      </div>
+    
+    <h1 class="f3 near-black">
+      <a href="https://cdtft.github.io/cdtft.blog/post/java_spring_factrorybean/" class="link black dim">
+        How to use the Spring FactoryBean?(翻译)
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      1. Overview 有两种类型的bean在Spring bean容器中：普通的bean(ordinary bean)和工厂bean(factory bean)。Spring直接使用前者，后者能够产生又Spring管理的对象。简单的说，我们可以通过实现org.springframework.beans.factory.FactoryBean接口来构建一个工程bean。
+2. Factory Beans基础 2.1 实现一个FactoryBean 首先来让我们看看FactoryBean接口
+public interface FactoryBean { T getObject() throws Exception; Class&lt;?&gt; getObjectType(); boolean isSingleton(); } 让我们详细的看看这个三个方法的功能
+ getObject()-返回一个由该工厂产生对象，这个对象将被Spring容器使用 getObjectType()-返回该工厂生产bena对象的类类型 isSingleton()-判断由该工厂产生的bean是否是单例的 接下来我们实现一个FactoryBean实例。实现一个产生Tool类型的ToolFactory。  public class Tool { private int id; // standard constructors, getters and setters } ToolFactory.java:
+public class ToolFactory implements FactoryBean&lt;Tool&gt; { private int factoryId; private int toolId; @Override public Tool getObject() throws Exception { return new Tool(toolId); } @Override public Class&lt;?
+    </div>
+  </div>
+
+        </div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white">
+          
+            <div class="mb3 pa4 mid-gray overflow-hidden">
+    
+      <div class="f6">
         March 23, 2020
       </div>
     

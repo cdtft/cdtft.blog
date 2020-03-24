@@ -69,3 +69,19 @@ public class Employee {
 ```
 # 8. BeanFactory with ClassPathResource
 ClassPathResource 属于org.springframework.core.io包，让我们使用ClassPathResource快速测试和初始化XmlBeanFactory
+```java
+public class BeanFactoryWithClassPathResourceTest {
+ 
+    @Test
+    public void createBeanFactoryAndCheckEmployeeBean() {
+        Resource res = new ClassPathResource("beanfactory-example.xml");
+        BeanFactory factory = new XmlBeanFactory(res);
+        Employee emp = (Employee) factory.getBean("employee");
+ 
+        assertTrue(factory.isSingleton("employee"));
+        assertTrue(factory.getBean("employee") instanceof Employee);
+        assertTrue(factory.isTypeMatch("employee", Employee.class));
+        assertTrue(factory.getAliases("employee").length > 0);
+    }
+}
+```

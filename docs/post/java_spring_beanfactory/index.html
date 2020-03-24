@@ -55,7 +55,7 @@ Spring容器的职责是实例化、配置、组装beans。Spring容器通过阅
  关注bean实例化的生命周期，和在适当的时候调用销毁方法。 能够在实例化依赖对象之间建立关联 最重要的的是BeanFactory不支持基于注解配置的依赖注入，但是ApplicationContext则支持。  6.Defining the Bean public class Employee { private String name; private int age; // standard constructors, getters and setters } 7.">
 <meta itemprop="datePublished" content="2020-03-24T14:35:22&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-24T14:35:22&#43;08:00" />
-<meta itemprop="wordCount" content="108">
+<meta itemprop="wordCount" content="143">
 
 
 
@@ -236,7 +236,21 @@ Spring容器的职责是实例化、配置、组装beans。Spring容器通过阅
 <span style="color:#f92672">&lt;/beans&gt;</span>
 </code></pre></div><h1 id="8-beanfactory-with-classpathresource">8. BeanFactory with ClassPathResource</h1>
 <p>ClassPathResource 属于org.springframework.core.io包，让我们使用ClassPathResource快速测试和初始化XmlBeanFactory</p>
-<ul class="pa0">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BeanFactoryWithClassPathResourceTest</span> <span style="color:#f92672">{</span>
+ 
+    <span style="color:#a6e22e">@Test</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">createBeanFactoryAndCheckEmployeeBean</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        Resource res <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ClassPathResource<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;beanfactory-example.xml&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        BeanFactory factory <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> XmlBeanFactory<span style="color:#f92672">(</span>res<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        Employee emp <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>Employee<span style="color:#f92672">)</span> factory<span style="color:#f92672">.</span><span style="color:#a6e22e">getBean</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;employee&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+ 
+        assertTrue<span style="color:#f92672">(</span>factory<span style="color:#f92672">.</span><span style="color:#a6e22e">isSingleton</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;employee&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        assertTrue<span style="color:#f92672">(</span>factory<span style="color:#f92672">.</span><span style="color:#a6e22e">getBean</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;employee&#34;</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">instanceof</span> Employee<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        assertTrue<span style="color:#f92672">(</span>factory<span style="color:#f92672">.</span><span style="color:#a6e22e">isTypeMatch</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;employee&#34;</span><span style="color:#f92672">,</span> Employee<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        assertTrue<span style="color:#f92672">(</span>factory<span style="color:#f92672">.</span><span style="color:#a6e22e">getAliases</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;employee&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">length</span> <span style="color:#f92672">&gt;</span> 0<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ul class="pa0">
   
    <li class="list">
      <a href="/cdtft.blog/tags/spring" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Spring</a>

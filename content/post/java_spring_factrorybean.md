@@ -67,7 +67,7 @@ public class ToolFactory implements FactoryBean<Tool> {
 </beans>
 ```
 接下来测试Tool对象是否能注入：
-```
+```java
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:factorybean-spring-ctx.xml" })
 public class FactoryBeanXmlConfigTest {
@@ -85,7 +85,7 @@ public class FactoryBeanXmlConfigTest {
 Spring容器使用FactoryBean的getObject()方法返回该工厂产生的bean，也可以返回工厂本身。
 `想要获取FactoryBean，仅仅需要在bena name前加上'&'符号`
 
-```
+```java
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:factorybean-spring-ctx.xml" })
 public class FactoryBeanXmlConfigTest {
@@ -121,7 +121,7 @@ public class FactoryBeanAppConfig {
 
 ```
 接下来测试Tool是否能被正确注入：
-```
+```java
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = FactoryBeanAppConfig.class)
 public class FactoryBeanJavaConfigTest {
@@ -147,7 +147,7 @@ public class FactoryBeanJavaConfigTest {
 # 4.AbstractFactoryBean
 Spring提供了一个实现FactoryBean接口的模版超类AbstractFacortyBean。通过这个基础类我们可以很方便的实现产生singleton和prototype类型bean的工厂bean。
 让我们实现SingleToolFactory和NonSingleToolFactory来展示如何使用AbstractFactoryBean来产生singleton和prototype类型的bean。
-```
+```java
 public class SingleToolFactory extends AbstractFactoryBean<Tool> {
  
     private int factoryId;
@@ -167,7 +167,7 @@ public class SingleToolFactory extends AbstractFactoryBean<Tool> {
 }
 ```
 nonsingleton实现：
-```
+```java
 public class NonSingleToolFactory extends AbstractFactoryBean<Tool> {
  
     private int factoryId;
@@ -206,7 +206,7 @@ factory bean的XML配置：
 </beans>
 ```
 我们可以测试工作的对象属性注入是否和我们期望的一样。
-```
+```java
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:factorybean-abstract-spring-ctx.xml" })
 public class AbstractFactoryBeanTest {

@@ -224,34 +224,34 @@ public class ToolFactory implements FactoryBean&lt;Tool&gt; { private int factor
     <span style="color:#f92672">&lt;/bean&gt;</span>
 <span style="color:#f92672">&lt;/beans&gt;</span>
 </code></pre></div><p>接下来测试Tool对象是否能注入：</p>
-<pre><code>@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { &quot;classpath:factorybean-spring-ctx.xml&quot; })
-public class FactoryBeanXmlConfigTest {
-    @Autowired
-    private Tool tool;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@RunWith</span><span style="color:#f92672">(</span>SpringJUnit4ClassRunner<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span>
+<span style="color:#a6e22e">@ContextConfiguration</span><span style="color:#f92672">(</span>locations <span style="color:#f92672">=</span> <span style="color:#f92672">{</span> <span style="color:#e6db74">&#34;classpath:factorybean-spring-ctx.xml&#34;</span> <span style="color:#f92672">}</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FactoryBeanXmlConfigTest</span> <span style="color:#f92672">{</span>
+    <span style="color:#a6e22e">@Autowired</span>
+    <span style="color:#66d9ef">private</span> Tool tool<span style="color:#f92672">;</span>
  
-    @Test
-    public void testConstructWorkerByXml() {
-        assertThat(tool.getId(), equalTo(1));
-    }
-}
-</code></pre><p>测试结果表明，我们使用在factorybean-spring-ctx.xml中配置的属性注入由ToolFactory生成的tool对象。
+    <span style="color:#a6e22e">@Test</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">testConstructWorkerByXml</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        assertThat<span style="color:#f92672">(</span>tool<span style="color:#f92672">.</span><span style="color:#a6e22e">getId</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">,</span> equalTo<span style="color:#f92672">(</span>1<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>测试结果表明，我们使用在factorybean-spring-ctx.xml中配置的属性注入由ToolFactory生成的tool对象。
 测试结果也显示，Spring容器FactoryBean产生的对象进行依赖注入而不是对象自生。
 Spring容器使用FactoryBean的getObject()方法返回该工厂产生的bean，也可以返回工厂本身。
 <code>想要获取FactoryBean，仅仅需要在bena name前加上'&amp;'符号</code></p>
-<pre><code>@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { &quot;classpath:factorybean-spring-ctx.xml&quot; })
-public class FactoryBeanXmlConfigTest {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@RunWith</span><span style="color:#f92672">(</span>SpringJUnit4ClassRunner<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span>
+<span style="color:#a6e22e">@ContextConfiguration</span><span style="color:#f92672">(</span>locations <span style="color:#f92672">=</span> <span style="color:#f92672">{</span> <span style="color:#e6db74">&#34;classpath:factorybean-spring-ctx.xml&#34;</span> <span style="color:#f92672">}</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FactoryBeanXmlConfigTest</span> <span style="color:#f92672">{</span>
  
-    @Resource(name = &quot;&amp;tool&quot;)
-    private ToolFactory toolFactory;
+    <span style="color:#a6e22e">@Resource</span><span style="color:#f92672">(</span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&amp;tool&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">private</span> ToolFactory toolFactory<span style="color:#f92672">;</span>
  
-    @Test
-    public void testConstructWorkerByXml() {
-        assertThat(toolFactory.getFactoryId(), equalTo(9090));
-    }
-}
-</code></pre><h2 id="23-javafactorybean">2.3 使用基于java配置的FactoryBean</h2>
+    <span style="color:#a6e22e">@Test</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">testConstructWorkerByXml</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        assertThat<span style="color:#f92672">(</span>toolFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">getFactoryId</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">,</span> equalTo<span style="color:#f92672">(</span>9090<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h2 id="23-javafactorybean">2.3 使用基于java配置的FactoryBean</h2>
 <p>使用FacotyBean通过java配置和基于XML配置有一点小的差别，java配置需要明确的调用FactotyBean的getObject()方法。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Configuration</span>
 <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FactoryBeanAppConfig</span> <span style="color:#f92672">{</span>
@@ -271,69 +271,69 @@ public class FactoryBeanXmlConfigTest {
 <span style="color:#f92672">}</span>
 
 </code></pre></div><p>接下来测试Tool是否能被正确注入：</p>
-<pre><code>@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = FactoryBeanAppConfig.class)
-public class FactoryBeanJavaConfigTest {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@RunWith</span><span style="color:#f92672">(</span>SpringJUnit4ClassRunner<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span>
+<span style="color:#a6e22e">@ContextConfiguration</span><span style="color:#f92672">(</span>classes <span style="color:#f92672">=</span> FactoryBeanAppConfig<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FactoryBeanJavaConfigTest</span> <span style="color:#f92672">{</span>
  
-    @Autowired
-    private Tool tool;
+    <span style="color:#a6e22e">@Autowired</span>
+    <span style="color:#66d9ef">private</span> Tool tool<span style="color:#f92672">;</span>
   
-    @Resource(name = &quot;&amp;tool&quot;)
-    private ToolFactory toolFactory;
+    <span style="color:#a6e22e">@Resource</span><span style="color:#f92672">(</span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&amp;tool&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">private</span> ToolFactory toolFactory<span style="color:#f92672">;</span>
  
-    @Test
-    public void testConstructWorkerByJava() {
-        assertThat(tool.getId(), equalTo(2));
-        assertThat(toolFactory.getFactoryId(), equalTo(7070));
-    }
-}
-</code></pre><p>这和之前XML配置测试的效果一样。</p>
+    <span style="color:#a6e22e">@Test</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">testConstructWorkerByJava</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        assertThat<span style="color:#f92672">(</span>tool<span style="color:#f92672">.</span><span style="color:#a6e22e">getId</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">,</span> equalTo<span style="color:#f92672">(</span>2<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        assertThat<span style="color:#f92672">(</span>toolFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">getFactoryId</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">,</span> equalTo<span style="color:#f92672">(</span>7070<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>这和之前XML配置测试的效果一样。</p>
 <h1 id="3">3.初始化方式</h1>
 <p>在有些时候我们需要在FactoryBean设置之后，getObject()方法调用之前做一些操作例如属性检查。
 你可以实现InitializingBean接口或者使用@PostConstruct注解。</p>
 <h1 id="4abstractfactorybean">4.AbstractFactoryBean</h1>
 <p>Spring提供了一个实现FactoryBean接口的模版超类AbstractFacortyBean。通过这个基础类我们可以很方便的实现产生singleton和prototype类型bean的工厂bean。
 让我们实现SingleToolFactory和NonSingleToolFactory来展示如何使用AbstractFactoryBean来产生singleton和prototype类型的bean。</p>
-<pre><code>public class SingleToolFactory extends AbstractFactoryBean&lt;Tool&gt; {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SingleToolFactory</span> <span style="color:#66d9ef">extends</span> AbstractFactoryBean<span style="color:#f92672">&lt;</span>Tool<span style="color:#f92672">&gt;</span> <span style="color:#f92672">{</span>
  
-    private int factoryId;
-    private int toolId;
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> factoryId<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> toolId<span style="color:#f92672">;</span>
  
-    @Override
-    public Class&lt;?&gt; getObjectType() {
-        return Tool.class;
-    }
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> Class<span style="color:#f92672">&lt;</span><span style="color:#f92672">?</span><span style="color:#f92672">&gt;</span> getObjectType<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> Tool<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
  
-    @Override
-    protected Tool createInstance() throws Exception {
-        return new Tool(toolId);
-    }
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">protected</span> Tool <span style="color:#a6e22e">createInstance</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> Exception <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Tool<span style="color:#f92672">(</span>toolId<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
  
-    // standard setters and getters
-}
-</code></pre><p>nonsingleton实现：</p>
-<pre><code>public class NonSingleToolFactory extends AbstractFactoryBean&lt;Tool&gt; {
+    <span style="color:#75715e">// standard setters and getters
+</span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</code></pre></div><p>nonsingleton实现：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NonSingleToolFactory</span> <span style="color:#66d9ef">extends</span> AbstractFactoryBean<span style="color:#f92672">&lt;</span>Tool<span style="color:#f92672">&gt;</span> <span style="color:#f92672">{</span>
  
-    private int factoryId;
-    private int toolId;
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> factoryId<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> toolId<span style="color:#f92672">;</span>
  
-    public NonSingleToolFactory() {
-        setSingleton(false);
-    }
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">NonSingleToolFactory</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        setSingleton<span style="color:#f92672">(</span><span style="color:#66d9ef">false</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
  
-    @Override
-    public Class&lt;?&gt; getObjectType() {
-        return Tool.class;
-    }
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> Class<span style="color:#f92672">&lt;</span><span style="color:#f92672">?</span><span style="color:#f92672">&gt;</span> getObjectType<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> Tool<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
  
-    @Override
-    protected Tool createInstance() throws Exception {
-        return new Tool(toolId);
-    }
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">protected</span> Tool <span style="color:#a6e22e">createInstance</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> Exception <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> Tool<span style="color:#f92672">(</span>toolId<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
  
-    // standard setters and getters
-}
-</code></pre><p>factory bean的XML配置：</p>
+    <span style="color:#75715e">// standard setters and getters
+</span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</code></pre></div><p>factory bean的XML配置：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;beans</span> <span style="color:#960050;background-color:#1e0010">.</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#f92672">&gt;</span>
  
     <span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;singleTool&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;com.baeldung.factorybean.SingleToolFactory&#34;</span><span style="color:#f92672">&gt;</span>
@@ -347,36 +347,36 @@ public class FactoryBeanJavaConfigTest {
     <span style="color:#f92672">&lt;/bean&gt;</span>
 <span style="color:#f92672">&lt;/beans&gt;</span>
 </code></pre></div><p>我们可以测试工作的对象属性注入是否和我们期望的一样。</p>
-<pre><code>@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { &quot;classpath:factorybean-abstract-spring-ctx.xml&quot; })
-public class AbstractFactoryBeanTest {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@RunWith</span><span style="color:#f92672">(</span>SpringJUnit4ClassRunner<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span>
+<span style="color:#a6e22e">@ContextConfiguration</span><span style="color:#f92672">(</span>locations <span style="color:#f92672">=</span> <span style="color:#f92672">{</span> <span style="color:#e6db74">&#34;classpath:factorybean-abstract-spring-ctx.xml&#34;</span> <span style="color:#f92672">}</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AbstractFactoryBeanTest</span> <span style="color:#f92672">{</span>
  
-    @Resource(name = &quot;singleTool&quot;)
-    private Tool tool1;
+    <span style="color:#a6e22e">@Resource</span><span style="color:#f92672">(</span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;singleTool&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">private</span> Tool tool1<span style="color:#f92672">;</span>
   
-    @Resource(name = &quot;singleTool&quot;)
-    private Tool tool2;
+    <span style="color:#a6e22e">@Resource</span><span style="color:#f92672">(</span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;singleTool&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">private</span> Tool tool2<span style="color:#f92672">;</span>
   
-    @Resource(name = &quot;nonSingleTool&quot;)
-    private Tool tool3;
+    <span style="color:#a6e22e">@Resource</span><span style="color:#f92672">(</span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;nonSingleTool&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">private</span> Tool tool3<span style="color:#f92672">;</span>
   
-    @Resource(name = &quot;nonSingleTool&quot;)
-    private Tool tool4;
+    <span style="color:#a6e22e">@Resource</span><span style="color:#f92672">(</span>name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;nonSingleTool&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">private</span> Tool tool4<span style="color:#f92672">;</span>
  
-    @Test
-    public void testSingleToolFactory() {
-        assertThat(tool1.getId(), equalTo(1));
-        assertTrue(tool1 == tool2);
-    }
+    <span style="color:#a6e22e">@Test</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">testSingleToolFactory</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        assertThat<span style="color:#f92672">(</span>tool1<span style="color:#f92672">.</span><span style="color:#a6e22e">getId</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">,</span> equalTo<span style="color:#f92672">(</span>1<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        assertTrue<span style="color:#f92672">(</span>tool1 <span style="color:#f92672">=</span><span style="color:#f92672">=</span> tool2<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
  
-    @Test
-    public void testNonSingleToolFactory() {
-        assertThat(tool3.getId(), equalTo(2));
-        assertThat(tool4.getId(), equalTo(2));
-        assertTrue(tool3 != tool4);
-    }
-}
-</code></pre><p>通过测试我们可以看到SingleToolFactory产生singleton对象，NonSingleToolFactory产生prototype对象。
+    <span style="color:#a6e22e">@Test</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">testNonSingleToolFactory</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        assertThat<span style="color:#f92672">(</span>tool3<span style="color:#f92672">.</span><span style="color:#a6e22e">getId</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">,</span> equalTo<span style="color:#f92672">(</span>2<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        assertThat<span style="color:#f92672">(</span>tool4<span style="color:#f92672">.</span><span style="color:#a6e22e">getId</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">,</span> equalTo<span style="color:#f92672">(</span>2<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        assertTrue<span style="color:#f92672">(</span>tool3 <span style="color:#f92672">!</span><span style="color:#f92672">=</span> tool4<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>通过测试我们可以看到SingleToolFactory产生singleton对象，NonSingleToolFactory产生prototype对象。
 注意无需设置singleton属性在SingleToolFactory中因为在AbstractFactory中singleton熟悉的默认值就是true</p>
 <ul class="pa0">
   

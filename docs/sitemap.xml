@@ -4,7 +4,14 @@
   
   <url>
     <loc>https://cdtft.github.io/cdtft.blog/</loc>
-    <lastmod>2017-04-14T11:25:05-04:00</lastmod>
+    <lastmod>2020-03-23T14:40:37+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://cdtft.github.io/cdtft.blog/post/myfirst/</loc>
+    <lastmod>2020-03-23T14:40:37+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

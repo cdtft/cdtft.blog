@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>cdftf@qq.com  | Guide to the Spring BeanFactory(翻译)</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.61.0" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="/cdtft.blog/dist/css/app.1cb140d8ba31d5b2f1114537dd04802a.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+    
+
+    
+    
+    <meta property="og:title" content="Guide to the Spring BeanFactory(翻译)" />
+<meta property="og:description" content="1.Introduction 这篇文章将关注Spring BeanFactory API BeanFactory接口提供了简单也可以说是复杂的配置机制通过Spring Ioc容器来管理对象。
+2.Basic - Beans and Container 简单的说，beans是构成Spring application骨架的java对象，它们被Spring Ioc容器管理。除了用容器管理以外，bean没有什么其他特别的地方。
+Spring容器的职责是实例化、配置、组装beans。Spring容器通过阅读配置元信息来实例化、配置、管理我们在程序中定义的对象。
+3.Maven Dependencies 让我们添加需要的依赖在pom.xml文件中。我们将用Spring Beans依赖去设置BeanFactory:
+&lt;dependency&gt; &lt;groupId&gt;org.springframework&lt;/groupId&gt; &lt;artifactId&gt;spring-beans&lt;/artifactId&gt; &lt;version&gt;5.1.4.RELEASE&lt;/version&gt; &lt;/dependency&gt; 4.The BeanFactory Interface 一开始查看org.springframework.beans.factory包中的接口的定义和讨论重要的APIs是很有趣的事情。
+4.1The getBean() APIs 各种版本的getBean()方法都返回了指定bean的实例
+4.2The containsBean() APIs 这个方法通过提供的名称来确认bean工厂容器中是否存在该名称的bean。该方法确认getBean(java.lang.String)是否能获得给定名称的bean实例。
+4.3The isPrototype() API 这个方法确认通过getBean(java.lang.String)方法获得实例是否被设置为prototype类型
+需要注意的是如果该方法返回的的是false也不意味着是一个Singleton对象，也可能是是其他scopes non-independent实例。
+5.BeanFactory API BeanFactory持有bean的定义，并且当客户端程序请求时实例化 - 意思是：
+ 关注bean实例化的生命周期，和在适当的时候调用销毁方法。 能够在实例化依赖对象之间建立关联 最重要的的是BeanFactory不支持基于注解配置的依赖注入，但是ApplicationContext则支持。  6.Defining the Bean public class Employee { private String name; private int age; // standard constructors, getters and setters } 7." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://cdtft.github.io/cdtft.blog/post/java_spring_beanfactory/" />
+<meta property="article:published_time" content="2020-03-24T14:35:22+08:00" />
+<meta property="article:modified_time" content="2020-03-24T14:35:22+08:00" />
+<meta itemprop="name" content="Guide to the Spring BeanFactory(翻译)">
+<meta itemprop="description" content="1.Introduction 这篇文章将关注Spring BeanFactory API BeanFactory接口提供了简单也可以说是复杂的配置机制通过Spring Ioc容器来管理对象。
+2.Basic - Beans and Container 简单的说，beans是构成Spring application骨架的java对象，它们被Spring Ioc容器管理。除了用容器管理以外，bean没有什么其他特别的地方。
+Spring容器的职责是实例化、配置、组装beans。Spring容器通过阅读配置元信息来实例化、配置、管理我们在程序中定义的对象。
+3.Maven Dependencies 让我们添加需要的依赖在pom.xml文件中。我们将用Spring Beans依赖去设置BeanFactory:
+&lt;dependency&gt; &lt;groupId&gt;org.springframework&lt;/groupId&gt; &lt;artifactId&gt;spring-beans&lt;/artifactId&gt; &lt;version&gt;5.1.4.RELEASE&lt;/version&gt; &lt;/dependency&gt; 4.The BeanFactory Interface 一开始查看org.springframework.beans.factory包中的接口的定义和讨论重要的APIs是很有趣的事情。
+4.1The getBean() APIs 各种版本的getBean()方法都返回了指定bean的实例
+4.2The containsBean() APIs 这个方法通过提供的名称来确认bean工厂容器中是否存在该名称的bean。该方法确认getBean(java.lang.String)是否能获得给定名称的bean实例。
+4.3The isPrototype() API 这个方法确认通过getBean(java.lang.String)方法获得实例是否被设置为prototype类型
+需要注意的是如果该方法返回的的是false也不意味着是一个Singleton对象，也可能是是其他scopes non-independent实例。
+5.BeanFactory API BeanFactory持有bean的定义，并且当客户端程序请求时实例化 - 意思是：
+ 关注bean实例化的生命周期，和在适当的时候调用销毁方法。 能够在实例化依赖对象之间建立关联 最重要的的是BeanFactory不支持基于注解配置的依赖注入，但是ApplicationContext则支持。  6.Defining the Bean public class Employee { private String name; private int age; // standard constructors, getters and setters } 7.">
+<meta itemprop="datePublished" content="2020-03-24T14:35:22&#43;08:00" />
+<meta itemprop="dateModified" content="2020-03-24T14:35:22&#43;08:00" />
+<meta itemprop="wordCount" content="108">
+
+
+
+<meta itemprop="keywords" content="Spring," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Guide to the Spring BeanFactory(翻译)"/>
+<meta name="twitter:description" content="1.Introduction 这篇文章将关注Spring BeanFactory API BeanFactory接口提供了简单也可以说是复杂的配置机制通过Spring Ioc容器来管理对象。
+2.Basic - Beans and Container 简单的说，beans是构成Spring application骨架的java对象，它们被Spring Ioc容器管理。除了用容器管理以外，bean没有什么其他特别的地方。
+Spring容器的职责是实例化、配置、组装beans。Spring容器通过阅读配置元信息来实例化、配置、管理我们在程序中定义的对象。
+3.Maven Dependencies 让我们添加需要的依赖在pom.xml文件中。我们将用Spring Beans依赖去设置BeanFactory:
+&lt;dependency&gt; &lt;groupId&gt;org.springframework&lt;/groupId&gt; &lt;artifactId&gt;spring-beans&lt;/artifactId&gt; &lt;version&gt;5.1.4.RELEASE&lt;/version&gt; &lt;/dependency&gt; 4.The BeanFactory Interface 一开始查看org.springframework.beans.factory包中的接口的定义和讨论重要的APIs是很有趣的事情。
+4.1The getBean() APIs 各种版本的getBean()方法都返回了指定bean的实例
+4.2The containsBean() APIs 这个方法通过提供的名称来确认bean工厂容器中是否存在该名称的bean。该方法确认getBean(java.lang.String)是否能获得给定名称的bean实例。
+4.3The isPrototype() API 这个方法确认通过getBean(java.lang.String)方法获得实例是否被设置为prototype类型
+需要注意的是如果该方法返回的的是false也不意味着是一个Singleton对象，也可能是是其他scopes non-independent实例。
+5.BeanFactory API BeanFactory持有bean的定义，并且当客户端程序请求时实例化 - 意思是：
+ 关注bean实例化的生命周期，和在适当的时候调用销毁方法。 能够在实例化依赖对象之间建立关联 最重要的的是BeanFactory不支持基于注解配置的依赖注入，但是ApplicationContext则支持。  6.Defining the Bean public class Employee { private String name; private int age; // standard constructors, getters and setters } 7."/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="https://cdtft.github.io/cdtft.blog/" class="f3 fw2 hover-white no-underline white-90 dib">
+      cdftf@qq.com
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/cdtft.blog/about/" title="About page">
+              About
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/cdtft.blog/post/" title="Articles page">
+              Articles
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/cdtft.blog/contact/" title="Contact page">
+              Contact
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+
+
+
+
+      
+
+
+
+
+  <div id="sharing" class="mt3">
+
+    
+    <a href="https://www.facebook.com/sharer.php?u=https://cdtft.github.io/cdtft.blog/post/java_spring_beanfactory/" class="facebook no-underline" aria-label="share on Facebook">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M28.765,50.32h6.744V33.998h4.499l0.596-5.624h-5.095  l0.007-2.816c0-1.466,0.14-2.253,2.244-2.253h2.812V17.68h-4.5c-5.405,0-7.307,2.729-7.307,7.317v3.377h-3.369v5.625h3.369V50.32z   M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+
+    </a>
+
+    
+    
+    <a href="https://twitter.com/share?url=https://cdtft.github.io/cdtft.blog/post/java_spring_beanfactory/&amp;text=Guide%20to%20the%20Spring%20BeanFactory%28%e7%bf%bb%e8%af%91%29" class="twitter no-underline" aria-label="share on Twitter">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/></svg>
+
+    </a>
+
+    
+    <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://cdtft.github.io/cdtft.blog/post/java_spring_beanfactory/&amp;title=Guide%20to%20the%20Spring%20BeanFactory%28%e7%bf%bb%e8%af%91%29" class="linkedin no-underline" aria-label="share on LinkedIn">
+      <svg  height="32px"  style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+
+    </a>
+  </div>
+
+      <h1 class="f1 athelas mt3 mb1" style="text-align: center">Guide to the Spring BeanFactory(翻译)</h1>
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2020-03-24T14:35:22&#43;08:00">March 24, 2020</time>
+
+      
+      
+    </header>
+    <div style="width: 100%" class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h1 id="1introduction">1.Introduction</h1>
+<p>这篇文章将关注<code>Spring BeanFactory API</code>
+<code>BeanFactory</code>接口提供了简单也可以说是复杂的配置机制通过Spring Ioc容器来管理对象。</p>
+<h1 id="2basic---beans-and-container">2.Basic - Beans and Container</h1>
+<p>简单的说，beans是构成Spring application骨架的java对象，它们被Spring Ioc容器管理。除了用容器管理以外，bean没有什么其他特别的地方。</p>
+<p>Spring容器的职责是实例化、配置、组装beans。Spring容器通过阅读配置元信息来实例化、配置、管理我们在程序中定义的对象。</p>
+<h1 id="3maven-dependencies">3.Maven Dependencies</h1>
+<p>让我们添加需要的依赖在pom.xml文件中。我们将用Spring Beans依赖去设置BeanFactory:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;dependency</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;groupId</span><span style="color:#f92672">&gt;</span>org.springframework<span style="color:#f92672">&lt;/groupId&gt;</span>
+    <span style="color:#f92672">&lt;artifactId</span><span style="color:#f92672">&gt;</span>spring-beans<span style="color:#f92672">&lt;/artifactId&gt;</span>
+    <span style="color:#f92672">&lt;version</span><span style="color:#f92672">&gt;</span>5.1.4.RELEASE<span style="color:#f92672">&lt;/version&gt;</span>
+<span style="color:#f92672">&lt;/dependency&gt;</span>
+</code></pre></div><h1 id="4the-beanfactory-interface">4.The BeanFactory Interface</h1>
+<p>一开始查看org.springframework.beans.factory包中的接口的定义和讨论重要的APIs是很有趣的事情。</p>
+<h2 id="41the-getbean-apis">4.1The getBean() APIs</h2>
+<p>各种版本的getBean()方法都返回了指定bean的实例</p>
+<h2 id="42the-containsbean-apis">4.2The containsBean() APIs</h2>
+<p>这个方法通过提供的名称来确认bean工厂容器中是否存在该名称的bean。该方法确认getBean(java.lang.String)是否能获得给定名称的bean实例。</p>
+<h2 id="43the-isprototype-api">4.3The isPrototype() API</h2>
+<p>这个方法确认通过getBean(java.lang.String)方法获得实例是否被设置为prototype类型</p>
+<p>需要注意的是如果该方法返回的的是false也不意味着是一个Singleton对象，也可能是是其他scopes non-independent实例。</p>
+<h1 id="5beanfactory-api">5.BeanFactory API</h1>
+<p>BeanFactory持有bean的定义，并且当客户端程序请求时实例化 - 意思是：</p>
+<ul>
+<li>关注bean实例化的生命周期，和在适当的时候调用销毁方法。</li>
+<li>能够在实例化依赖对象之间建立关联</li>
+<li>最重要的的是BeanFactory不支持基于注解配置的依赖注入，但是ApplicationContext则支持。</li>
+</ul>
+<h1 id="6defining-the-bean">6.Defining the Bean</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Employee</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> String name<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> age<span style="color:#f92672">;</span>
+     
+    <span style="color:#75715e">// standard constructors, getters and setters
+</span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</code></pre></div><h1 id="7configuring-the-beanfactory-with-xml">7.Configuring the BeanFactory with XML</h1>
+<p>我们可以使用XMl来配置BeanFactory,让我们创建beanfactory-exeample.xml</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+<span style="color:#f92672">&lt;beans</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://www.springframework.org/schema/beans&#34;</span>
+  <span style="color:#a6e22e">xmlns:xsi=</span><span style="color:#e6db74">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
+  <span style="color:#a6e22e">xsi:schemaLocation=</span><span style="color:#e6db74">&#34;http://www.springframework.org/schema/beans
+</span><span style="color:#e6db74">  http://www.springframework.org/schema/beans/spring-beans-3.0.xsd&#34;</span><span style="color:#f92672">&gt;</span>
+ 
+  <span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;employee&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;com.baeldung.beanfactory.Employee&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;constructor-arg</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;name&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;Hello! My name is Java&#34;</span><span style="color:#f92672">/&gt;</span>
+    <span style="color:#f92672">&lt;constructor-arg</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;age&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;18&#34;</span><span style="color:#f92672">/&gt;</span>
+  <span style="color:#f92672">&lt;/bean&gt;</span>    
+  <span style="color:#f92672">&lt;alias</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;employee&#34;</span> <span style="color:#a6e22e">alias=</span><span style="color:#e6db74">&#34;empalias&#34;</span><span style="color:#f92672">/&gt;</span>
+<span style="color:#f92672">&lt;/beans&gt;</span>
+</code></pre></div><h1 id="8-beanfactory-with-classpathresource">8. BeanFactory with ClassPathResource</h1>
+<p>ClassPathResource 属于org.springframework.core.io包，让我们使用ClassPathResource快速测试和初始化XmlBeanFactory</p>
+<ul class="pa0">
+  
+   <li class="list">
+     <a href="/cdtft.blog/tags/spring" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Spring</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">Related</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/cdtft.blog/post/java_spring_factrorybean/">How to use the Spring FactoryBean?(翻译)</a>
+        </li>
+	    
+    </ul>
+</div>
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://cdtft.github.io/cdtft.blog/" >
+    &copy;  cdftf@qq.com 2020 
+  </a>
+    <div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="/cdtft.blog/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>

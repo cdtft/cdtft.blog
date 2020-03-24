@@ -12,6 +12,25 @@
     
     
     <item>
+      <title>Guide to the Spring BeanFactory(翻译)</title>
+      <link>https://cdtft.github.io/cdtft.blog/post/java_spring_beanfactory/</link>
+      <pubDate>Tue, 24 Mar 2020 14:35:22 +0800</pubDate>
+      
+      <guid>https://cdtft.github.io/cdtft.blog/post/java_spring_beanfactory/</guid>
+      <description>1.Introduction 这篇文章将关注Spring BeanFactory API BeanFactory接口提供了简单也可以说是复杂的配置机制通过Spring Ioc容器来管理对象。
+2.Basic - Beans and Container 简单的说，beans是构成Spring application骨架的java对象，它们被Spring Ioc容器管理。除了用容器管理以外，bean没有什么其他特别的地方。
+Spring容器的职责是实例化、配置、组装beans。Spring容器通过阅读配置元信息来实例化、配置、管理我们在程序中定义的对象。
+3.Maven Dependencies 让我们添加需要的依赖在pom.xml文件中。我们将用Spring Beans依赖去设置BeanFactory:
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-beans&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;5.1.4.RELEASE&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 4.The BeanFactory Interface 一开始查看org.springframework.beans.factory包中的接口的定义和讨论重要的APIs是很有趣的事情。
+4.1The getBean() APIs 各种版本的getBean()方法都返回了指定bean的实例
+4.2The containsBean() APIs 这个方法通过提供的名称来确认bean工厂容器中是否存在该名称的bean。该方法确认getBean(java.lang.String)是否能获得给定名称的bean实例。
+4.3The isPrototype() API 这个方法确认通过getBean(java.lang.String)方法获得实例是否被设置为prototype类型
+需要注意的是如果该方法返回的的是false也不意味着是一个Singleton对象，也可能是是其他scopes non-independent实例。
+5.BeanFactory API BeanFactory持有bean的定义，并且当客户端程序请求时实例化 - 意思是：
+ 关注bean实例化的生命周期，和在适当的时候调用销毁方法。 能够在实例化依赖对象之间建立关联 最重要的的是BeanFactory不支持基于注解配置的依赖注入，但是ApplicationContext则支持。  6.Defining the Bean public class Employee { private String name; private int age; // standard constructors, getters and setters } 7.</description>
+    </item>
+    
+    <item>
       <title>How to use the Spring FactoryBean?(翻译)</title>
       <link>https://cdtft.github.io/cdtft.blog/post/java_spring_factrorybean/</link>
       <pubDate>Tue, 24 Mar 2020 13:50:44 +0800</pubDate>

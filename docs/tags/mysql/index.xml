@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mysql on cdftf@qq.com</title>
+    <link>https://cdtft.github.io/cdtft.blog/tags/mysql/</link>
+    <description>Recent content in mysql on cdftf@qq.com</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 29 Mar 2020 14:28:45 +0800</lastBuildDate>
+    
+	<atom:link href="https://cdtft.github.io/cdtft.blog/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Mysql抖动</title>
+      <link>https://cdtft.github.io/cdtft.blog/post/mysql_%E6%8A%96%E5%8A%A8/</link>
+      <pubDate>Sun, 29 Mar 2020 14:28:45 +0800</pubDate>
+      
+      <guid>https://cdtft.github.io/cdtft.blog/post/mysql_%E6%8A%96%E5%8A%A8/</guid>
+      <description>脏页 当内存数据页和磁盘数据也不一致的时候我们称这个内存页为脏页。内存页中的数据写入磁盘后，内存中的数据和磁盘中的数据保持一致称为干净页。
+flush 内存页中的数据和磁盘上的数据同步的过程叫flush，这时数据库发生抖动。
+数据库flush的四种情况：
+ InnoDB 的redo log写满了。 系统的内存页不够用。 MySQL认为系统空闲的时候会将脏页flush。 MySQL正常关闭的时候会将脏页flush。  脏页的比例计算 不要将脏页的比例经常接近75%,计算公式Innodb_buffer_pool_pages_dirty/Innodb_buffer_pool_pages_total
+Innodb_buffer_pool_pages_dirty select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME = &amp;#39;Innodb_buffer_pool_pages_dirty&amp;#39;;Innodb_buffer_pool_pages_total select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME = &#39;Innodb_buffer_pool_pages_total&#39;;</description>
+    </item>
+    
+  </channel>
+</rss>

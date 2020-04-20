@@ -21,7 +21,7 @@
 flush 内存页中的数据和磁盘上的数据同步的过程叫flush，这时数据库发生抖动。
 数据库flush的四种情况：
  InnoDB 的redo log写满了。 系统的内存页不够用。 MySQL认为系统空闲的时候会将脏页flush。 MySQL正常关闭的时候会将脏页flush。  脏页的比例计算 不要将脏页的比例经常接近75%,计算公式Innodb_buffer_pool_pages_dirty/Innodb_buffer_pool_pages_total
-Innodb_buffer_pool_pages_dirty select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME = &amp;#39;Innodb_buffer_pool_pages_dirty&amp;#39;;Innodb_buffer_pool_pages_total select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME = &#39;Innodb_buffer_pool_pages_total&#39;;</description>
+Innodb_buffer_pool_pages_dirty select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME = &amp;#39;Innodb_buffer_pool_pages_dirty&amp;#39;; Innodb_buffer_pool_pages_total select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME = &#39;Innodb_buffer_pool_pages_total&#39;; </description>
     </item>
     
   </channel>

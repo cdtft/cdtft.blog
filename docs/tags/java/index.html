@@ -6,7 +6,7 @@
     
     <title>cdftf@qq.com  | java</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.68.2" />
+    <meta name="generator" content="Hugo 0.61.0" />
     
     
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -131,7 +131,7 @@
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
       类会何时被初始化 有一下几种情况类会初始化
- 虚拟机启动的时候，初始化用户指定的主类 遇到new 调用静态方法时，初始化该静态方法所在的类 访问静态字段，初始化该静态字段所在的类 子类的初始化触发父类的初始化 定义了default接口，直接实现或间接实现该接口的类初始化会触发该接口的初始化 使用反射API对某个类反射调用时 初次调用Methodhandle实例时，初始化Methodhandle指向的方法所在的类  使用第4条规范实现单例模式 public class Singleton {private Singleton() {}private static class LazyHolder {private final Singleton INSTANCE = new Singleton();}public static Singleton getInstance() {return LazyHolder.INSTANCE; }}该单例是线程安全的
+ 虚拟机启动的时候，初始化用户指定的主类 遇到new 调用静态方法时，初始化该静态方法所在的类 访问静态字段，初始化该静态字段所在的类 子类的初始化触发父类的初始化 定义了default接口，直接实现或间接实现该接口的类初始化会触发该接口的初始化 使用反射API对某个类反射调用时 初次调用Methodhandle实例时，初始化Methodhandle指向的方法所在的类  使用第4条规范实现单例模式 public class Singleton { private Singleton() { } private static class LazyHolder { private final Singleton INSTANCE = new Singleton(); } public static Singleton getInstance() { return LazyHolder.INSTANCE; } } 该单例是线程安全的
     </div>
   </div>
 </div>

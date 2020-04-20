@@ -6,7 +6,7 @@
     
     <title>cdftf@qq.com  | Mysql抖动</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.68.2" />
+    <meta name="generator" content="Hugo 0.61.0" />
     
     
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -30,7 +30,7 @@
 flush 内存页中的数据和磁盘上的数据同步的过程叫flush，这时数据库发生抖动。
 数据库flush的四种情况：
  InnoDB 的redo log写满了。 系统的内存页不够用。 MySQL认为系统空闲的时候会将脏页flush。 MySQL正常关闭的时候会将脏页flush。  脏页的比例计算 不要将脏页的比例经常接近75%,计算公式Innodb_buffer_pool_pages_dirty/Innodb_buffer_pool_pages_total
-Innodb_buffer_pool_pages_dirty select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME = &#39;Innodb_buffer_pool_pages_dirty&#39;;Innodb_buffer_pool_pages_total select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME = &#39;Innodb_buffer_pool_pages_total&#39;;" />
+Innodb_buffer_pool_pages_dirty select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME = &#39;Innodb_buffer_pool_pages_dirty&#39;; Innodb_buffer_pool_pages_total select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME = &#39;Innodb_buffer_pool_pages_total&#39;; " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://cdtft.github.io/cdtft.blog/post/mysql_%E6%8A%96%E5%8A%A8/" />
 <meta property="article:published_time" content="2020-03-29T14:28:45+08:00" />
@@ -40,7 +40,7 @@ Innodb_buffer_pool_pages_dirty select VARIABLE_VALUE from performance_schema.glo
 flush 内存页中的数据和磁盘上的数据同步的过程叫flush，这时数据库发生抖动。
 数据库flush的四种情况：
  InnoDB 的redo log写满了。 系统的内存页不够用。 MySQL认为系统空闲的时候会将脏页flush。 MySQL正常关闭的时候会将脏页flush。  脏页的比例计算 不要将脏页的比例经常接近75%,计算公式Innodb_buffer_pool_pages_dirty/Innodb_buffer_pool_pages_total
-Innodb_buffer_pool_pages_dirty select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME = &#39;Innodb_buffer_pool_pages_dirty&#39;;Innodb_buffer_pool_pages_total select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME = &#39;Innodb_buffer_pool_pages_total&#39;;">
+Innodb_buffer_pool_pages_dirty select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME = &#39;Innodb_buffer_pool_pages_dirty&#39;; Innodb_buffer_pool_pages_total select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME = &#39;Innodb_buffer_pool_pages_total&#39;; ">
 <meta itemprop="datePublished" content="2020-03-29T14:28:45&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-29T14:28:45&#43;08:00" />
 <meta itemprop="wordCount" content="31">
@@ -53,7 +53,7 @@ Innodb_buffer_pool_pages_dirty select VARIABLE_VALUE from performance_schema.glo
 flush 内存页中的数据和磁盘上的数据同步的过程叫flush，这时数据库发生抖动。
 数据库flush的四种情况：
  InnoDB 的redo log写满了。 系统的内存页不够用。 MySQL认为系统空闲的时候会将脏页flush。 MySQL正常关闭的时候会将脏页flush。  脏页的比例计算 不要将脏页的比例经常接近75%,计算公式Innodb_buffer_pool_pages_dirty/Innodb_buffer_pool_pages_total
-Innodb_buffer_pool_pages_dirty select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME = &#39;Innodb_buffer_pool_pages_dirty&#39;;Innodb_buffer_pool_pages_total select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME = &#39;Innodb_buffer_pool_pages_total&#39;;"/>
+Innodb_buffer_pool_pages_dirty select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME = &#39;Innodb_buffer_pool_pages_dirty&#39;; Innodb_buffer_pool_pages_total select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME = &#39;Innodb_buffer_pool_pages_total&#39;; "/>
 
   </head>
 
@@ -166,7 +166,7 @@ Innodb_buffer_pool_pages_dirty select VARIABLE_VALUE from performance_schema.glo
       
       
     </header>
-    <div style="width: 100%" class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h1 id="脏页">脏页</h1>
+    <div style="width: 100%" class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h1 id="heading">脏页</h1>
 <p>当内存数据页和磁盘数据也不一致的时候我们称这个内存页为<code>脏页</code>。内存页中的数据写入磁盘后，内存中的数据和磁盘中的数据保持一致称为<code>干净页</code>。</p>
 <h1 id="flush">flush</h1>
 <p>内存页中的数据和磁盘上的数据同步的过程叫flush，这时数据库发生抖动。</p>
@@ -177,11 +177,11 @@ Innodb_buffer_pool_pages_dirty select VARIABLE_VALUE from performance_schema.glo
 <li>MySQL认为系统空闲的时候会将脏页flush。</li>
 <li>MySQL正常关闭的时候会将脏页flush。</li>
 </ol>
-<h1 id="脏页的比例计算">脏页的比例计算</h1>
+<h1 id="heading-1">脏页的比例计算</h1>
 <p>不要将脏页的比例经常接近<code>75%</code>,计算公式Innodb_buffer_pool_pages_dirty/Innodb_buffer_pool_pages_total</p>
-<h2 id="innodb_buffer_pool_pages_dirty">Innodb_buffer_pool_pages_dirty</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"> <span style="color:#66d9ef">select</span> VARIABLE_VALUE <span style="color:#66d9ef">from</span> performance_schema.global_status <span style="color:#66d9ef">where</span> VARIABLE_NAME <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Innodb_buffer_pool_pages_dirty&#39;</span>;
-</code></pre></div><h2 id="innodb_buffer_pool_pages_total">Innodb_buffer_pool_pages_total</h2>
+<h2 id="innodb-buffer-pool-pages-dirty">Innodb_buffer_pool_pages_dirty</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"> <span style="color:#66d9ef">select</span> VARIABLE_VALUE <span style="color:#66d9ef">from</span> performance_schema.global_status <span style="color:#66d9ef">where</span> VARIABLE_NAME <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Innodb_buffer_pool_pages_dirty</span><span style="color:#e6db74">&#39;</span>;
+</code></pre></div><h2 id="innodb-buffer-pool-pages-total">Innodb_buffer_pool_pages_total</h2>
 <pre><code class="language-slq" data-lang="slq">select VARIABLE_VALUE  from performance_schema.global_status where VARIABLE_NAME = 'Innodb_buffer_pool_pages_total';
 </code></pre><ul class="pa0">
   

@@ -6,7 +6,7 @@
     
     <title>cdftf@qq.com  | Articles</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.68.2" />
+    <meta name="generator" content="Hugo 0.61.0" />
     
     
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -125,6 +125,29 @@
             <div class="mb3 pa4 mid-gray overflow-hidden">
     
       <div class="f6">
+        April 20, 2020
+      </div>
+    
+    <h1 class="f3 near-black">
+      <a href="https://cdtft.github.io/cdtft.blog/post/beanfactory%E7%9A%84%E4%BD%BF%E7%94%A8%E7%96%91%E9%97%AE/" class="link black dim">
+        BeanFactory的使用
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      之前翻译过一篇BeanFactory和FactoryBean区别的文章，当一个Bean的初始化逻辑很 复杂的时候可以实现FactoryBean接口来定制Bean的初始化逻辑。
+定义FactoryBean bean的定义：
+public class Cat { private String name; public String getName() { return name; } public void setName(String name) { this.name = name; } @Override public String toString() { return new StringJoiner(&#34;, &#34;, Cat.class.getSimpleName() + &#34;[&#34;, &#34;]&#34;) .add(&#34;name=&#39;&#34; + name + &#34;&#39;&#34;) .toString(); } } 为Cat实现工厂bean:
+@Component public class CatFactoryBean implements FactoryBean&lt;Cat&gt; { @Override public Cat getObject() throws Exception { Cat car = new Cat(); car.setName(&#34;this is create by factory&#34;); return car; } @Override public Class&lt;?
+    </div>
+  </div>
+
+        </div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white">
+          
+            <div class="mb3 pa4 mid-gray overflow-hidden">
+    
+      <div class="f6">
         March 29, 2020
       </div>
     
@@ -138,7 +161,7 @@
 flush 内存页中的数据和磁盘上的数据同步的过程叫flush，这时数据库发生抖动。
 数据库flush的四种情况：
  InnoDB 的redo log写满了。 系统的内存页不够用。 MySQL认为系统空闲的时候会将脏页flush。 MySQL正常关闭的时候会将脏页flush。  脏页的比例计算 不要将脏页的比例经常接近75%,计算公式Innodb_buffer_pool_pages_dirty/Innodb_buffer_pool_pages_total
-Innodb_buffer_pool_pages_dirty select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME = &#39;Innodb_buffer_pool_pages_dirty&#39;;Innodb_buffer_pool_pages_total select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME = 'Innodb_buffer_pool_pages_total';
+Innodb_buffer_pool_pages_dirty select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME = &#39;Innodb_buffer_pool_pages_dirty&#39;; Innodb_buffer_pool_pages_total select VARIABLE_VALUE from performance_schema.global_status where VARIABLE_NAME = 'Innodb_buffer_pool_pages_total'; 
     </div>
   </div>
 
@@ -162,13 +185,13 @@ Innodb_buffer_pool_pages_dirty select VARIABLE_VALUE from performance_schema.glo
 2.Basic - Beans and Container 简单的说，beans是构成Spring application骨架的java对象，它们被Spring Ioc容器管理。除了用容器管理以外，bean没有什么其他特别的地方。
 Spring容器的职责是实例化、配置、组装beans。Spring容器通过阅读配置元信息来实例化、配置、管理我们在程序中定义的对象。
 3.Maven Dependencies 让我们添加需要的依赖在pom.xml文件中。我们将用Spring Beans依赖去设置BeanFactory:
-&lt;dependency&gt;&lt;groupId&gt;org.springframework&lt;/groupId&gt;&lt;artifactId&gt;spring-beans&lt;/artifactId&gt;&lt;version&gt;5.1.4.RELEASE&lt;/version&gt;&lt;/dependency&gt;4.The BeanFactory Interface 一开始查看org.springframework.beans.factory包中的接口的定义和讨论重要的APIs是很有趣的事情。
+&lt;dependency&gt; &lt;groupId&gt;org.springframework&lt;/groupId&gt; &lt;artifactId&gt;spring-beans&lt;/artifactId&gt; &lt;version&gt;5.1.4.RELEASE&lt;/version&gt; &lt;/dependency&gt; 4.The BeanFactory Interface 一开始查看org.springframework.beans.factory包中的接口的定义和讨论重要的APIs是很有趣的事情。
 4.1The getBean() APIs 各种版本的getBean()方法都返回了指定bean的实例
 4.2The containsBean() APIs 这个方法通过提供的名称来确认bean工厂容器中是否存在该名称的bean。该方法确认getBean(java.lang.String)是否能获得给定名称的bean实例。
 4.3The isPrototype() API 这个方法确认通过getBean(java.lang.String)方法获得实例是否被设置为prototype类型
 需要注意的是如果该方法返回的的是false也不意味着是一个Singleton对象，也可能是是其他scopes non-independent实例。
 5.BeanFactory API BeanFactory持有bean的定义，并且当客户端程序请求时实例化 - 意思是：
- 关注bean实例化的生命周期，和在适当的时候调用销毁方法。 能够在实例化依赖对象之间建立关联 最重要的的是BeanFactory不支持基于注解配置的依赖注入，但是ApplicationContext则支持。  6.Defining the Bean public class Employee {private String name;private int age;// standard constructors, getters and setters}7.
+ 关注bean实例化的生命周期，和在适当的时候调用销毁方法。 能够在实例化依赖对象之间建立关联 最重要的的是BeanFactory不支持基于注解配置的依赖注入，但是ApplicationContext则支持。  6.Defining the Bean public class Employee { private String name; private int age; // standard constructors, getters and setters } 7.
     </div>
   </div>
 
@@ -190,9 +213,9 @@ Spring容器的职责是实例化、配置、组装beans。Spring容器通过阅
     <div class="nested-links f5 lh-copy nested-copy-line-height">
       1. Overview 有两种类型的bean在Spring bean容器中：普通的bean(ordinary bean)和工厂bean(factory bean)。Spring直接使用前者，后者能够产生又Spring管理的对象。简单的说，我们可以通过实现org.springframework.beans.factory.FactoryBean接口来构建一个工程bean。
 2. Factory Beans基础 2.1 实现一个FactoryBean 首先来让我们看看FactoryBean接口
-public interface FactoryBean {T getObject() throws Exception;Class&lt;?&gt; getObjectType();boolean isSingleton();}让我们详细的看看这个三个方法的功能
- getObject()-返回一个由该工厂产生对象，这个对象将被Spring容器使用 getObjectType()-返回该工厂生产bena对象的类类型 isSingleton()-判断由该工厂产生的bean是否是单例的 接下来我们实现一个FactoryBean实例。实现一个产生Tool类型的ToolFactory。  public class Tool {private int id;// standard constructors, getters and setters}ToolFactory.java:
-public class ToolFactory implements FactoryBean&lt;Tool&gt; {private int factoryId;private int toolId;@Overridepublic Tool getObject() throws Exception {return new Tool(toolId);}@Overridepublic Class&lt;?
+public interface FactoryBean { T getObject() throws Exception; Class&lt;?&gt; getObjectType(); boolean isSingleton(); } 让我们详细的看看这个三个方法的功能
+ getObject()-返回一个由该工厂产生对象，这个对象将被Spring容器使用 getObjectType()-返回该工厂生产bena对象的类类型 isSingleton()-判断由该工厂产生的bean是否是单例的 接下来我们实现一个FactoryBean实例。实现一个产生Tool类型的ToolFactory。  public class Tool { private int id; // standard constructors, getters and setters } ToolFactory.java:
+public class ToolFactory implements FactoryBean&lt;Tool&gt; { private int factoryId; private int toolId; @Override public Tool getObject() throws Exception { return new Tool(toolId); } @Override public Class&lt;?
     </div>
   </div>
 
@@ -213,7 +236,7 @@ public class ToolFactory implements FactoryBean&lt;Tool&gt; {private int factor
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
       类会何时被初始化 有一下几种情况类会初始化
- 虚拟机启动的时候，初始化用户指定的主类 遇到new 调用静态方法时，初始化该静态方法所在的类 访问静态字段，初始化该静态字段所在的类 子类的初始化触发父类的初始化 定义了default接口，直接实现或间接实现该接口的类初始化会触发该接口的初始化 使用反射API对某个类反射调用时 初次调用Methodhandle实例时，初始化Methodhandle指向的方法所在的类  使用第4条规范实现单例模式 public class Singleton {private Singleton() {}private static class LazyHolder {private final Singleton INSTANCE = new Singleton();}public static Singleton getInstance() {return LazyHolder.INSTANCE; }}该单例是线程安全的
+ 虚拟机启动的时候，初始化用户指定的主类 遇到new 调用静态方法时，初始化该静态方法所在的类 访问静态字段，初始化该静态字段所在的类 子类的初始化触发父类的初始化 定义了default接口，直接实现或间接实现该接口的类初始化会触发该接口的初始化 使用反射API对某个类反射调用时 初次调用Methodhandle实例时，初始化Methodhandle指向的方法所在的类  使用第4条规范实现单例模式 public class Singleton { private Singleton() { } private static class LazyHolder { private final Singleton INSTANCE = new Singleton(); } public static Singleton getInstance() { return LazyHolder.INSTANCE; } } 该单例是线程安全的
     </div>
   </div>
 

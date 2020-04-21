@@ -125,17 +125,39 @@
             <div class="mb3 pa4 mid-gray overflow-hidden">
     
       <div class="f6">
+        April 21, 2020
+      </div>
+    
+    <h1 class="f3 near-black">
+      <a href="https://cdtft.github.io/cdtft.blog/post/2020042101/" class="link black dim">
+        Why Spring在创建ApplicationContext是要使用Class.forName()
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      前言 在看SpringBoot源码的时候，在main方法启动的时候会调用SpringApplication#run()方法
+context = createApplicationContext(); createApplicationContext():
+protected ConfigurableApplicationContext createApplicationContext() { Class&lt;?&gt; contextClass = this.applicationContextClass; if (contextClass == null) { try { switch (this.webApplicationType) { case SERVLET: contextClass = Class.forName(DEFAULT_SERVLET_WEB_CONTEXT_CLASS); break; case REACTIVE: contextClass = Class.forName(DEFAULT_REACTIVE_WEB_CONTEXT_CLASS); break; default: contextClass = Class.forName(DEFAULT_CONTEXT_CLASS); } } catch (ClassNotFoundException ex) { throw new IllegalStateException( &quot;Unable create a default ApplicationContext, &quot; + &quot;please specify an ApplicationContextClass&quot;, ex); } } return (ConfigurableApplicationContext) BeanUtils.instantiateClass(contextClass); } 上面的逻辑不同的web application type就会用Class.forName()加载对映的class文件。
+    </div>
+  </div>
+
+        </div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white">
+          
+            <div class="mb3 pa4 mid-gray overflow-hidden">
+    
+      <div class="f6">
         April 20, 2020
       </div>
     
     <h1 class="f3 near-black">
       <a href="https://cdtft.github.io/cdtft.blog/post/beanfactory%E7%9A%84%E4%BD%BF%E7%94%A8%E7%96%91%E9%97%AE/" class="link black dim">
-        BeanFactory的使用
+        Why我不通过ApplicationContext获取bean
       </a>
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
       之前翻译过一篇BeanFactory和FactoryBean区别的文章，当一个Bean的初始化逻辑很 复杂的时候可以实现FactoryBean接口来定制Bean的初始化逻辑。
-定义FactoryBean bean的定义：
+前言 bean的定义：
 public class Cat { private String name; public String getName() { return name; } public void setName(String name) { this.name = name; } @Override public String toString() { return new StringJoiner(&#34;, &#34;, Cat.class.getSimpleName() + &#34;[&#34;, &#34;]&#34;) .add(&#34;name=&#39;&#34; + name + &#34;&#39;&#34;) .toString(); } } 为Cat实现工厂bean:
 @Component public class CatFactoryBean implements FactoryBean&lt;Cat&gt; { @Override public Cat getObject() throws Exception { Cat car = new Cat(); car.setName(&#34;this is create by factory&#34;); return car; } @Override public Class&lt;?
     </div>

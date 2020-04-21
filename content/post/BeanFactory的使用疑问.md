@@ -1,11 +1,11 @@
 ---
-title: "BeanFactory的使用"
+title: "Why我不通过ApplicationContext获取bean"
 date: 2020-04-20T14:04:17+08:00
 tag: ["Spring", "BeanFactory"]
 ---
 之前翻译过一篇BeanFactory和FactoryBean区别的文章，当一个Bean的初始化逻辑很
 复杂的时候可以实现FactoryBean接口来定制Bean的初始化逻辑。
-## 定义FactoryBean
+## 前言
 bean的定义：
 ```java
 public class Cat {

@@ -3,14 +3,21 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://cdtft.github.io/cdtft.blog/post/beanfactory%E7%9A%84%E4%BD%BF%E7%94%A8%E7%96%91%E9%97%AE/</loc>
-    <lastmod>2020-04-20T14:04:17+08:00</lastmod>
+    <loc>https://cdtft.github.io/cdtft.blog/post/2020042101/</loc>
+    <lastmod>2020-04-21T16:59:26+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://cdtft.github.io/cdtft.blog/</loc>
+    <lastmod>2020-04-21T16:59:26+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://cdtft.github.io/cdtft.blog/post/beanfactory%E7%9A%84%E4%BD%BF%E7%94%A8%E7%96%91%E9%97%AE/</loc>
     <lastmod>2020-04-20T14:04:17+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>

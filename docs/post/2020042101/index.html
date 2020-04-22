@@ -39,7 +39,7 @@ context = createApplicationContext(); createApplicationContext():
 protected ConfigurableApplicationContext createApplicationContext() { Class&lt;?&gt; contextClass = this.applicationContextClass; if (contextClass == null) { try { switch (this.webApplicationType) { case SERVLET: contextClass = Class.forName(DEFAULT_SERVLET_WEB_CONTEXT_CLASS); break; case REACTIVE: contextClass = Class.forName(DEFAULT_REACTIVE_WEB_CONTEXT_CLASS); break; default: contextClass = Class.forName(DEFAULT_CONTEXT_CLASS); } } catch (ClassNotFoundException ex) { throw new IllegalStateException( &#34;Unable create a default ApplicationContext, &#34; &#43; &#34;please specify an ApplicationContextClass&#34;, ex); } } return (ConfigurableApplicationContext) BeanUtils.instantiateClass(contextClass); } 上面的逻辑不同的web application type就会用Class.forName()加载对映的class文件。">
 <meta itemprop="datePublished" content="2020-04-21T16:59:26&#43;08:00" />
 <meta itemprop="dateModified" content="2020-04-21T16:59:26&#43;08:00" />
-<meta itemprop="wordCount" content="78">
+<meta itemprop="wordCount" content="79">
 
 
 
@@ -198,6 +198,7 @@ protected ConfigurableApplicationContext createApplicationContext() { Class&lt;?
 <p>Spring为什么使用Class.forName()加载类，我想在写这段逻辑的时候其实并不知用户会引入那种WenApplicationContext
 的jar包，所以根本就不能使用new。使用Class.forName()可以以根据不同的情况加载类。</p>
 <h3 id="classfornameclassloader">Class.forName()和Classloader的区别</h3>
+<p>Class.forName()把类加载JVM并且执行静态代码块，Classloader把类加载到JVM后newInstance后才会执行静态代码块</p>
 <ul class="pa0">
   
 </ul>

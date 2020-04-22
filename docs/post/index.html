@@ -136,7 +136,7 @@
     <div class="nested-links f5 lh-copy nested-copy-line-height">
       前言 在看SpringBoot源码的时候，在main方法启动的时候会调用SpringApplication#run()方法
 context = createApplicationContext(); createApplicationContext():
-protected ConfigurableApplicationContext createApplicationContext() { Class&lt;?&gt; contextClass = this.applicationContextClass; if (contextClass == null) { try { switch (this.webApplicationType) { case SERVLET: contextClass = Class.forName(DEFAULT_SERVLET_WEB_CONTEXT_CLASS); break; case REACTIVE: contextClass = Class.forName(DEFAULT_REACTIVE_WEB_CONTEXT_CLASS); break; default: contextClass = Class.forName(DEFAULT_CONTEXT_CLASS); } } catch (ClassNotFoundException ex) { throw new IllegalStateException( &quot;Unable create a default ApplicationContext, &quot; + &quot;please specify an ApplicationContextClass&quot;, ex); } } return (ConfigurableApplicationContext) BeanUtils.instantiateClass(contextClass); } 上面的逻辑不同的web application type就会用Class.forName()加载对映的class文件。
+protected ConfigurableApplicationContext createApplicationContext() { Class&lt;?&gt; contextClass = this.applicationContextClass; if (contextClass == null) { try { switch (this.webApplicationType) { case SERVLET: contextClass = Class.forName(DEFAULT_SERVLET_WEB_CONTEXT_CLASS); break; case REACTIVE: contextClass = Class.forName(DEFAULT_REACTIVE_WEB_CONTEXT_CLASS); break; default: contextClass = Class.forName(DEFAULT_CONTEXT_CLASS); } } catch (ClassNotFoundException ex) { throw new IllegalStateException( &#34;Unable create a default ApplicationContext, &#34; + &#34;please specify an ApplicationContextClass&#34;, ex); } } return (ConfigurableApplicationContext) BeanUtils.instantiateClass(contextClass); } 上面的逻辑不同的web application type就会用Class.forName()加载对映的class文件。
     </div>
   </div>
 

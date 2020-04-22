@@ -28,7 +28,7 @@
     <meta property="og:title" content="Why Spring在创建ApplicationContext是要使用Class.forName()" />
 <meta property="og:description" content="前言 在看SpringBoot源码的时候，在main方法启动的时候会调用SpringApplication#run()方法
 context = createApplicationContext(); createApplicationContext():
-protected ConfigurableApplicationContext createApplicationContext() { Class&lt;?&gt; contextClass = this.applicationContextClass; if (contextClass == null) { try { switch (this.webApplicationType) { case SERVLET: contextClass = Class.forName(DEFAULT_SERVLET_WEB_CONTEXT_CLASS); break; case REACTIVE: contextClass = Class.forName(DEFAULT_REACTIVE_WEB_CONTEXT_CLASS); break; default: contextClass = Class.forName(DEFAULT_CONTEXT_CLASS); } } catch (ClassNotFoundException ex) { throw new IllegalStateException( &quot;Unable create a default ApplicationContext, &quot; &#43; &quot;please specify an ApplicationContextClass&quot;, ex); } } return (ConfigurableApplicationContext) BeanUtils.instantiateClass(contextClass); } 上面的逻辑不同的web application type就会用Class.forName()加载对映的class文件。" />
+protected ConfigurableApplicationContext createApplicationContext() { Class&lt;?&gt; contextClass = this.applicationContextClass; if (contextClass == null) { try { switch (this.webApplicationType) { case SERVLET: contextClass = Class.forName(DEFAULT_SERVLET_WEB_CONTEXT_CLASS); break; case REACTIVE: contextClass = Class.forName(DEFAULT_REACTIVE_WEB_CONTEXT_CLASS); break; default: contextClass = Class.forName(DEFAULT_CONTEXT_CLASS); } } catch (ClassNotFoundException ex) { throw new IllegalStateException( &#34;Unable create a default ApplicationContext, &#34; &#43; &#34;please specify an ApplicationContextClass&#34;, ex); } } return (ConfigurableApplicationContext) BeanUtils.instantiateClass(contextClass); } 上面的逻辑不同的web application type就会用Class.forName()加载对映的class文件。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://cdtft.github.io/cdtft.blog/post/2020042101/" />
 <meta property="article:published_time" content="2020-04-21T16:59:26+08:00" />
@@ -36,7 +36,7 @@ protected ConfigurableApplicationContext createApplicationContext() { Class&lt;?
 <meta itemprop="name" content="Why Spring在创建ApplicationContext是要使用Class.forName()">
 <meta itemprop="description" content="前言 在看SpringBoot源码的时候，在main方法启动的时候会调用SpringApplication#run()方法
 context = createApplicationContext(); createApplicationContext():
-protected ConfigurableApplicationContext createApplicationContext() { Class&lt;?&gt; contextClass = this.applicationContextClass; if (contextClass == null) { try { switch (this.webApplicationType) { case SERVLET: contextClass = Class.forName(DEFAULT_SERVLET_WEB_CONTEXT_CLASS); break; case REACTIVE: contextClass = Class.forName(DEFAULT_REACTIVE_WEB_CONTEXT_CLASS); break; default: contextClass = Class.forName(DEFAULT_CONTEXT_CLASS); } } catch (ClassNotFoundException ex) { throw new IllegalStateException( &quot;Unable create a default ApplicationContext, &quot; &#43; &quot;please specify an ApplicationContextClass&quot;, ex); } } return (ConfigurableApplicationContext) BeanUtils.instantiateClass(contextClass); } 上面的逻辑不同的web application type就会用Class.forName()加载对映的class文件。">
+protected ConfigurableApplicationContext createApplicationContext() { Class&lt;?&gt; contextClass = this.applicationContextClass; if (contextClass == null) { try { switch (this.webApplicationType) { case SERVLET: contextClass = Class.forName(DEFAULT_SERVLET_WEB_CONTEXT_CLASS); break; case REACTIVE: contextClass = Class.forName(DEFAULT_REACTIVE_WEB_CONTEXT_CLASS); break; default: contextClass = Class.forName(DEFAULT_CONTEXT_CLASS); } } catch (ClassNotFoundException ex) { throw new IllegalStateException( &#34;Unable create a default ApplicationContext, &#34; &#43; &#34;please specify an ApplicationContextClass&#34;, ex); } } return (ConfigurableApplicationContext) BeanUtils.instantiateClass(contextClass); } 上面的逻辑不同的web application type就会用Class.forName()加载对映的class文件。">
 <meta itemprop="datePublished" content="2020-04-21T16:59:26&#43;08:00" />
 <meta itemprop="dateModified" content="2020-04-21T16:59:26&#43;08:00" />
 <meta itemprop="wordCount" content="78">
@@ -47,7 +47,7 @@ protected ConfigurableApplicationContext createApplicationContext() { Class&lt;?
 <meta name="twitter:title" content="Why Spring在创建ApplicationContext是要使用Class.forName()"/>
 <meta name="twitter:description" content="前言 在看SpringBoot源码的时候，在main方法启动的时候会调用SpringApplication#run()方法
 context = createApplicationContext(); createApplicationContext():
-protected ConfigurableApplicationContext createApplicationContext() { Class&lt;?&gt; contextClass = this.applicationContextClass; if (contextClass == null) { try { switch (this.webApplicationType) { case SERVLET: contextClass = Class.forName(DEFAULT_SERVLET_WEB_CONTEXT_CLASS); break; case REACTIVE: contextClass = Class.forName(DEFAULT_REACTIVE_WEB_CONTEXT_CLASS); break; default: contextClass = Class.forName(DEFAULT_CONTEXT_CLASS); } } catch (ClassNotFoundException ex) { throw new IllegalStateException( &quot;Unable create a default ApplicationContext, &quot; &#43; &quot;please specify an ApplicationContextClass&quot;, ex); } } return (ConfigurableApplicationContext) BeanUtils.instantiateClass(contextClass); } 上面的逻辑不同的web application type就会用Class.forName()加载对映的class文件。"/>
+protected ConfigurableApplicationContext createApplicationContext() { Class&lt;?&gt; contextClass = this.applicationContextClass; if (contextClass == null) { try { switch (this.webApplicationType) { case SERVLET: contextClass = Class.forName(DEFAULT_SERVLET_WEB_CONTEXT_CLASS); break; case REACTIVE: contextClass = Class.forName(DEFAULT_REACTIVE_WEB_CONTEXT_CLASS); break; default: contextClass = Class.forName(DEFAULT_CONTEXT_CLASS); } } catch (ClassNotFoundException ex) { throw new IllegalStateException( &#34;Unable create a default ApplicationContext, &#34; &#43; &#34;please specify an ApplicationContextClass&#34;, ex); } } return (ConfigurableApplicationContext) BeanUtils.instantiateClass(contextClass); } 上面的逻辑不同的web application type就会用Class.forName()加载对映的class文件。"/>
 
   </head>
 
@@ -162,32 +162,32 @@ protected ConfigurableApplicationContext createApplicationContext() { Class&lt;?
     </header>
     <div style="width: 100%" class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h2 id="heading">前言</h2>
 <p>在看SpringBoot源码的时候，在main方法启动的时候会调用SpringApplication#run()方法</p>
-<pre><code>context = createApplicationContext();
-</code></pre><p>createApplicationContext():</p>
-<pre><code>protected ConfigurableApplicationContext createApplicationContext() {
-    Class&lt;?&gt; contextClass = this.applicationContextClass;
-    if (contextClass == null) {
-        try {
-            switch (this.webApplicationType) {
-            case SERVLET:
-                contextClass = Class.forName(DEFAULT_SERVLET_WEB_CONTEXT_CLASS);
-                break;
-            case REACTIVE:
-                contextClass = Class.forName(DEFAULT_REACTIVE_WEB_CONTEXT_CLASS);
-                break;
-            default:
-                contextClass = Class.forName(DEFAULT_CONTEXT_CLASS);
-            }
-        }
-        catch (ClassNotFoundException ex) {
-            throw new IllegalStateException(
-                    &quot;Unable create a default ApplicationContext, &quot; + &quot;please specify an ApplicationContextClass&quot;,
-                    ex);
-        }
-    }
-    return (ConfigurableApplicationContext) BeanUtils.instantiateClass(contextClass);
-}
-</code></pre><p>上面的逻辑不同的web application type就会用Class.forName()加载对映的class文件。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">context <span style="color:#f92672">=</span> createApplicationContext<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+</code></pre></div><p>createApplicationContext():</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">protected</span> ConfigurableApplicationContext <span style="color:#a6e22e">createApplicationContext</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    Class<span style="color:#f92672">&lt;</span><span style="color:#f92672">?</span><span style="color:#f92672">&gt;</span> contextClass <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">applicationContextClass</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>contextClass <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">switch</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">webApplicationType</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">case</span> SERVLET<span style="color:#f92672">:</span>
+                contextClass <span style="color:#f92672">=</span> Class<span style="color:#f92672">.</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span>DEFAULT_SERVLET_WEB_CONTEXT_CLASS<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">case</span> REACTIVE<span style="color:#f92672">:</span>
+                contextClass <span style="color:#f92672">=</span> Class<span style="color:#f92672">.</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span>DEFAULT_REACTIVE_WEB_CONTEXT_CLASS<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+                contextClass <span style="color:#f92672">=</span> Class<span style="color:#f92672">.</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span>DEFAULT_CONTEXT_CLASS<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>ClassNotFoundException ex<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> IllegalStateException<span style="color:#f92672">(</span>
+                    <span style="color:#e6db74">&#34;Unable create a default ApplicationContext, &#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;please specify an ApplicationContextClass&#34;</span><span style="color:#f92672">,</span>
+                    ex<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#f92672">(</span>ConfigurableApplicationContext<span style="color:#f92672">)</span> BeanUtils<span style="color:#f92672">.</span><span style="color:#a6e22e">instantiateClass</span><span style="color:#f92672">(</span>contextClass<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>上面的逻辑不同的web application type就会用Class.forName()加载对映的class文件。</p>
 <h2 id="heading-1">问题</h2>
 <ul>
 <li>为什么要使用Class.forName()去加载不同的Context,而不直接new。我们知道new也是会将class文件

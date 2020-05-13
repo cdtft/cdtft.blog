@@ -39,7 +39,7 @@ context = createApplicationContext(); createApplicationContext():
 protected ConfigurableApplicationContext createApplicationContext() { Class&lt;?&gt; contextClass = this.applicationContextClass; if (contextClass == null) { try { switch (this.webApplicationType) { case SERVLET: contextClass = Class.forName(DEFAULT_SERVLET_WEB_CONTEXT_CLASS); break; case REACTIVE: contextClass = Class.forName(DEFAULT_REACTIVE_WEB_CONTEXT_CLASS); break; default: contextClass = Class.forName(DEFAULT_CONTEXT_CLASS); } } catch (ClassNotFoundException ex) { throw new IllegalStateException( &#34;Unable create a default ApplicationContext, &#34; &#43; &#34;please specify an ApplicationContextClass&#34;, ex); } } return (ConfigurableApplicationContext) BeanUtils.instantiateClass(contextClass); } 上面的逻辑不同的web application type就会用Class.forName()加载对映的class文件。">
 <meta itemprop="datePublished" content="2020-04-21T16:59:26&#43;08:00" />
 <meta itemprop="dateModified" content="2020-04-21T16:59:26&#43;08:00" />
-<meta itemprop="wordCount" content="79">
+<meta itemprop="wordCount" content="113">
 
 
 
@@ -199,6 +199,19 @@ protected ConfigurableApplicationContext createApplicationContext() { Class&lt;?
 的jar包，所以根本就不能使用new。使用Class.forName()可以以根据不同的情况加载类。</p>
 <h3 id="classfornameclassloader">Class.forName()和Classloader的区别</h3>
 <p>Class.forName()把类加载JVM并且执行静态代码块，Classloader把类加载到JVM后newInstance后才会执行静态代码块</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Driver</span> <span style="color:#66d9ef">extends</span> NonRegisteringDriver <span style="color:#66d9ef">implements</span> java<span style="color:#f92672">.</span><span style="color:#a6e22e">sql</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Driver</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Driver</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> SQLException <span style="color:#f92672">{</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">static</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            DriverManager<span style="color:#f92672">.</span><span style="color:#a6e22e">registerDriver</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Driver<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>SQLException var1<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> RuntimeException<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Can&#39;t register driver!&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>在JDBC的driver的静态代码块中new了Driver并注册到了DriverManager，所以使用Class.forName来加载驱动。</p>
 <ul class="pa0">
   
 </ul>

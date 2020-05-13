@@ -3,14 +3,21 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://cdtft.github.io/cdtft.blog/post/2020042101/</loc>
-    <lastmod>2020-04-21T16:59:26+08:00</lastmod>
+    <loc>https://cdtft.github.io/cdtft.blog/post/2020051201/</loc>
+    <lastmod>2020-05-12T18:44:27+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://cdtft.github.io/cdtft.blog/</loc>
+    <lastmod>2020-05-12T18:44:27+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://cdtft.github.io/cdtft.blog/post/2020042101/</loc>
     <lastmod>2020-04-21T16:59:26+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>

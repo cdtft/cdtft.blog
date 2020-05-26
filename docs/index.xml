@@ -6,10 +6,23 @@
     <description>Recent content in 我用双手实现你的梦想 on cdftf@qq.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 12 May 2020 18:44:27 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 26 May 2020 15:15:50 +0800</lastBuildDate>
     
 	<atom:link href="https://cdtft.github.io/cdtft.blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>分布式唯一id</title>
+      <link>https://cdtft.github.io/cdtft.blog/post/2020052601/</link>
+      <pubDate>Tue, 26 May 2020 15:15:50 +0800</pubDate>
+      
+      <guid>https://cdtft.github.io/cdtft.blog/post/2020052601/</guid>
+      <description>前言 最近集成了一个SpringBoot stater基于百度开源的ID生成器uid, 具体介绍可以查看官方文档
+分布式唯一id的使用场景  高并发：在高并发下数据库的如果采用自增id，id字段会成为一个热点数据产生竞争影响性能。 业务需求，需要唯一id。  如何解决时钟回拨的问题 产生时钟回拨的情况有哪些？  应用发生迁移，在容器环境下这是时常发生的。 服务器的时钟被回拨。  解决方案 针对应用发生迁移的情况，应用可能会重启。uid底层会依赖mysql生成worker id应用每一次重启 都会生成新的worker id就算是迁移到新的服务器环境时钟发生了回拨生成的id也是唯一不重复的。
+雪花算法算法时间序列的获取是强依赖本地时间的，而uid实在程序启动的时候缓存了时间序列
+this.lastSecond = new PaddedAtomicLong(TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis())); 看看lastSecond到底是个什么东西
+/** * Represents a padded {@link AtomicLong} to prevent the FalseSharing problem&amp;lt;p&amp;gt; * * The CPU cache line commonly be 64 bytes, here is a sample of cache line after padding:&amp;lt;br&amp;gt; * 64 bytes = 8 bytes (object reference) + 6 * 8 bytes (padded long) + 8 bytes (a long value) * * @author yutianbao */ public class PaddedAtomicLong extends AtomicLong { private static final long serialVersionUID = -3415778863941386253L; /** Padded 6 long (48 bytes) */ public volatile long p1, p2, p3, p4, p5, p6 = 7L; /** * Constructors from {@link AtomicLong} */ public PaddedAtomicLong() { super(); } public PaddedAtomicLong(long initialValue) { super(initialValue); } /** * To prevent GC optimizations for cleaning unused padded references */ public long sumPaddingToPreventOptimization() { return p1 + p2 + p3 + p4 + p5 + p6; } } 它继承了AtomicLong并进行了字节填充</description>
+    </item>
     
     <item>
       <title>Why java String 是不可变的？</title>
